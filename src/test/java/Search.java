@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class WishListTest {
+public class Search {
     private WebDriver driver;
 
 
@@ -20,20 +20,15 @@ public class WishListTest {
     }
 
     @Test
-    public void addToWishlist(){
-        driver.findElement(By.cssSelector("li.level0:nth-child(5) > a:nth-child(1)")).click();
-        driver.findElement(By.cssSelector("a.button")).click();
-        driver.findElement(By.cssSelector(".link-wishlist")).click();
-        WebElement messaje=driver.findElement(By.cssSelector(".page-title > h1:nth-child(1)"));
-        Assert.assertTrue(messaje.isDisplayed());
-
+    public void searchItem() {
+        driver.findElement(By.cssSelector("#search")).sendKeys("BIJUERIE");
+        driver.findElement(By.cssSelector("html#top.js.no-touch.localstorage.no-ios body.cms-index-index.cms-home div.wrapper div.page header#header.page-header div.page-header-container div#header-search.skip-content form#search_mini_form div.input-box button.button.search-button")).click();
+        WebElement message=driver.findElement(By.cssSelector(".page-title > h1:nth-child(1)"));
+        Assert.assertEquals("SEARCH RESULTS FOR 'BIJUERIE'",message.getText());
     }
     @After
     public void close(){
         driver.close();
     }
-
-
-
 
 }

@@ -6,8 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
-public class WishListTest {
+public class Menu {
+
     private WebDriver driver;
 
 
@@ -18,22 +20,21 @@ public class WishListTest {
         driver.manage().window().maximize();
         driver.get("http://testfasttrackit.info/selenium-test/");
     }
-
     @Test
-    public void addToWishlist(){
-        driver.findElement(By.cssSelector("li.level0:nth-child(5) > a:nth-child(1)")).click();
-        driver.findElement(By.cssSelector("a.button")).click();
-        driver.findElement(By.cssSelector(".link-wishlist")).click();
-        WebElement messaje=driver.findElement(By.cssSelector(".page-title > h1:nth-child(1)"));
-        Assert.assertTrue(messaje.isDisplayed());
+    public void clickSubcategory() {
+        Actions actions = new Actions(driver);
+        WebElement target = driver.findElement(By.cssSelector("li.level0:nth-child(2) > a:nth-child(1)"));
+        actions.moveToElement(target).perform();
+        driver.findElement(By.cssSelector(".nav-2-3 > a:nth-child(1)")).click();
+        WebElement message=driver.findElement(By.cssSelector(".page-title > h1:nth-child(1)"));
+        Assert.assertEquals("TEES, KNITS AND POLOS",message.getText());
 
     }
+
     @After
     public void close(){
         driver.close();
     }
-
-
 
 
 }
